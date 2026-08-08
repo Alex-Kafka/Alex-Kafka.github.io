@@ -1,0 +1,125 @@
+.asmodeus-ritual-title {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.04em;
+  align-items: baseline;
+}
+
+.ritual-letter {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    text-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.ritual-letter:hover,
+.ritual-letter:focus-visible {
+  color: #b08a4b;
+  text-shadow: 0 0 0.7rem rgba(176, 138, 75, 0.55);
+  transform: translateY(-0.06em);
+  outline: none;
+}
+
+.ritual-letter-selected {
+  color: #8f2835;
+  text-shadow: 0 0 0.75rem rgba(143, 40, 53, 0.62);
+}
+
+.ritual-status {
+  display: block;
+  min-height: 1.4em;
+  margin-top: 0.45rem;
+  color: var(--gray);
+  font-size: 0.88rem;
+  font-style: italic;
+}
+
+.ritual-error {
+  animation: ritual-rejection 280ms ease;
+}
+
+.ritual-complete {
+  color: #8f2835;
+  text-shadow: 0 0 1.2rem rgba(143, 40, 53, 0.35);
+  animation: ritual-awakening 700ms ease both;
+}
+
+.canon-revelation {
+  margin: 1rem 0 1.75rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(176, 138, 75, 0.55);
+  border-left: 0.28rem solid #8f2835;
+  border-radius: 0.45rem;
+  background:
+    radial-gradient(circle at top right, rgba(143, 40, 53, 0.14), transparent 48%), var(--lightgray);
+  box-shadow: 0 0.7rem 2rem rgba(26, 13, 15, 0.12);
+}
+
+.canon-revelation-kicker {
+  color: #b08a4b;
+  font-family: var(--headerFont);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.canon-revelation p {
+  margin: 0.35rem 0 0.8rem;
+  font-style: italic;
+}
+
+.canon-revelation-link,
+.canon-nav-link {
+  color: #8f2835 !important;
+  font-weight: 700;
+}
+
+.canon-nav-entry {
+  margin-bottom: 0.45rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid rgba(176, 138, 75, 0.42);
+}
+
+@keyframes ritual-rejection {
+  25% {
+    transform: translateX(-0.16rem);
+  }
+  50% {
+    transform: translateX(0.16rem);
+  }
+  75% {
+    transform: translateX(-0.08rem);
+  }
+}
+
+@keyframes ritual-awakening {
+  from {
+    opacity: 0;
+    letter-spacing: 0.42em;
+    filter: blur(0.22rem);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: normal;
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ritual-letter,
+  .ritual-complete,
+  .ritual-error {
+    animation: none;
+    transition: none;
+  }
+}

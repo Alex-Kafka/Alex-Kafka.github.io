@@ -1,3 +1,24 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+body {
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(125, 36, 49, 0.06), transparent 31rem),
+    linear-gradient(90deg, rgba(156, 113, 60, 0.035) 1px, transparent 1px);
+  background-size:
+    auto,
+    4.5rem 4.5rem;
+}
+
+.center article {
+  line-height: 1.78;
+}
+
+.center article > h1,
+.center article > h2,
+.center article > h3 {
+  letter-spacing: 0.012em;
+}
+
+blockquote {
+  border-color: var(--tertiary);
+}

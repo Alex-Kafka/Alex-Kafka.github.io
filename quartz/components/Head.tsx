@@ -84,6 +84,9 @@ export default (() => {
 
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
+        {fileData.frontmatter?.secret === true && (
+          <meta name="robots" content="noindex, nofollow, noarchive" />
+        )}
         <meta name="generator" content="Quartz" />
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
