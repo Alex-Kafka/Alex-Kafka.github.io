@@ -136,7 +136,7 @@ function setupAsmodeusRitual(): void {
     }
 
     letter.addEventListener("click", onClick)
-    window.addCleanup(() => letter.removeEventListener("click", onClick))
+    window.addCleanup?.(() => letter.removeEventListener("click", onClick))
     letters.push(letter)
     pageTitle.appendChild(letter)
   }
