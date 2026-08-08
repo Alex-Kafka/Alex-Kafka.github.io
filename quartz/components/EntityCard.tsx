@@ -3,6 +3,8 @@ import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } fro
 import { FilePath, FullSlug, resolveRelative, slugifyFilePath } from "../util/path"
 import { classNames } from "../util/lang"
 import style from "./styles/entityCard.scss"
+// @ts-ignore
+import script from "./scripts/entityCard.inline"
 
 type ImageMetadata = {
   fileName: string
@@ -129,7 +131,7 @@ const EntityCard: QuartzComponent = ({
   displayClass,
 }: QuartzComponentProps) => {
   const frontmatter = fileData.frontmatter as Record<string, unknown> | undefined
-  if (!frontmatter || fileData.slug === "index") return null
+  if (!frontmatter) return null
 
   const title = String(frontmatter.title ?? "Статья")
   const subtitle = typeof frontmatter.subtitle === "string" ? frontmatter.subtitle : undefined
@@ -175,5 +177,6 @@ const EntityCard: QuartzComponent = ({
 }
 
 EntityCard.css = style
+EntityCard.afterDOMLoaded = script
 
 export default (() => EntityCard) satisfies QuartzComponentConstructor
