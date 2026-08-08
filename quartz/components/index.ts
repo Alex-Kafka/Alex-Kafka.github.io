@@ -24,6 +24,7 @@ import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import AsmodeusRitual from "./AsmodeusRitual"
+import EntityCard from "./EntityCard"
 
 export {
   ArticleTitle,
@@ -52,4 +53,5 @@ export {
   Flex,
   ConditionalRender,
   AsmodeusRitual,
+  EntityCard,
 }
