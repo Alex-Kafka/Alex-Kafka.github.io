@@ -1,0 +1,676 @@
+.event-atlas {
+  --atlas-gold: #d8aa52;
+  --atlas-gold-bright: #f1cc7a;
+  --atlas-ink: #100f13;
+  --atlas-panel: rgba(18, 18, 23, 0.94);
+  --atlas-blue: #4ea5d9;
+  --atlas-red: #d6636f;
+  --atlas-violet: #9c78d8;
+  position: relative;
+  box-sizing: border-box;
+  width: min(76rem, calc(100vw - 2rem));
+  margin: 1.5rem 50% 3rem;
+  padding: 1.15rem;
+  transform: translateX(-50%);
+  border: 1px solid color-mix(in srgb, var(--atlas-gold) 58%, transparent);
+  border-radius: 0.75rem;
+  background:
+    linear-gradient(135deg, rgba(216, 170, 82, 0.1), transparent 28%),
+    radial-gradient(circle at 72% 12%, rgba(78, 165, 217, 0.12), transparent 28%), #111116;
+  color: #e9e1d2;
+  box-shadow:
+    0 1.6rem 4rem rgba(0, 0, 0, 0.38),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.event-atlas::before,
+.event-atlas::after {
+  position: absolute;
+  width: 4.5rem;
+  height: 1px;
+  top: 0.72rem;
+  background: linear-gradient(90deg, transparent, var(--atlas-gold));
+  content: "";
+}
+
+.event-atlas::before {
+  left: 1rem;
+}
+
+.event-atlas::after {
+  right: 1rem;
+  transform: scaleX(-1);
+}
+
+.event-atlas-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: flex-end;
+  padding: 0.75rem 0.45rem 1rem;
+}
+
+.event-atlas-eyebrow,
+.event-detail-kicker {
+  color: var(--atlas-gold);
+  font-family: var(--headerFont);
+  font-size: 0.69rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.event-atlas-header h2 {
+  margin: 0.12rem 0 0.4rem;
+  color: #fff7e7;
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+}
+
+.event-atlas-header p {
+  max-width: 46rem;
+  margin: 0;
+  color: #bcb4a8;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.event-atlas-date {
+  min-width: 14rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(216, 170, 82, 0.35);
+  text-align: right;
+}
+
+.event-atlas-date span {
+  display: block;
+  color: var(--atlas-gold-bright);
+  font-family: var(--headerFont);
+  font-size: 1.05rem;
+}
+
+.event-atlas-date strong {
+  display: block;
+  margin-top: 0.2rem;
+  color: #d5cdc0;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.event-atlas-timeline {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(9rem, 1fr));
+  overflow-x: auto;
+  margin: 0 -0.2rem 1rem;
+  padding: 0.2rem 0.2rem 0.65rem;
+  scrollbar-color: var(--atlas-gold) #232229;
+  scrollbar-width: thin;
+}
+
+.event-atlas-timeline button {
+  position: relative;
+  min-height: 4rem;
+  border: 0;
+  border-top: 1px solid #393640;
+  border-bottom: 1px solid #393640;
+  border-left: 1px solid #393640;
+  padding: 0.7rem 0.78rem;
+  background: #19181f;
+  color: #ada69b;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.event-atlas-timeline button:first-child {
+  border-radius: 0.4rem 0 0 0.4rem;
+}
+
+.event-atlas-timeline button:last-child {
+  border-right: 1px solid #393640;
+  border-radius: 0 0.4rem 0.4rem 0;
+}
+
+.event-atlas-timeline button::after {
+  position: absolute;
+  right: 0.65rem;
+  bottom: -0.25rem;
+  left: 0.65rem;
+  height: 0.18rem;
+  border-radius: 1rem;
+  background: transparent;
+  content: "";
+  transition: background 180ms ease;
+}
+
+.event-atlas-timeline button:hover,
+.event-atlas-timeline button:focus-visible,
+.event-atlas-timeline button.is-active {
+  z-index: 1;
+  border-color: rgba(216, 170, 82, 0.55);
+  outline: none;
+  background: linear-gradient(180deg, rgba(216, 170, 82, 0.17), #1c1a20);
+  color: #fff6e3;
+}
+
+.event-atlas-timeline button.is-active::after {
+  background: var(--atlas-gold);
+  box-shadow: 0 0 0.8rem rgba(216, 170, 82, 0.6);
+}
+
+.event-atlas-timeline button span,
+.event-atlas-timeline button strong {
+  display: block;
+}
+
+.event-atlas-timeline button span {
+  color: var(--atlas-gold);
+  font-family: var(--codeFont);
+  font-size: 0.68rem;
+}
+
+.event-atlas-timeline button strong {
+  margin-top: 0.28rem;
+  font-family: var(--headerFont);
+  font-size: 0.76rem;
+  line-height: 1.25;
+}
+
+.event-atlas-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(15rem, 20rem);
+  gap: 1rem;
+}
+
+.event-atlas-map-shell {
+  min-width: 0;
+}
+
+.event-atlas-map {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  border: 1px solid rgba(216, 170, 82, 0.45);
+  border-radius: 0.45rem;
+  background: #09090c;
+  box-shadow: inset 0 0 2.5rem rgba(0, 0, 0, 0.72);
+  isolation: isolate;
+}
+
+.event-atlas-layer {
+  position: absolute;
+  inset: 0;
+}
+
+// The regional Rivendalos map is square. Keeping its layer square prevents
+// cropping and keeps percentage-based markers and routes aligned with the map.
+.event-atlas-layer[data-map="rivendalos"] {
+  right: 16.666%;
+  left: 16.666%;
+}
+
+.event-atlas-layer[hidden] {
+  display: none;
+}
+
+.event-atlas-layer > img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 0;
+  object-fit: cover;
+  filter: saturate(0.78) brightness(0.7) sepia(0.12);
+  transform: scale(1.002);
+}
+
+.event-atlas-vignette {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 8, 11, 0.22),
+      transparent 18%,
+      transparent 78%,
+      rgba(8, 8, 11, 0.42)
+    ),
+    radial-gradient(circle, transparent 52%, rgba(7, 7, 9, 0.5) 100%);
+}
+
+.event-atlas-routes {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.event-route {
+  fill: none;
+  stroke: var(--atlas-route-color, var(--atlas-gold-bright));
+  stroke-width: 2.65;
+  stroke-linecap: round;
+  stroke-dasharray: 8 7;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.95;
+  animation: atlas-route-flow 7s linear infinite;
+}
+
+.event-route-shadow {
+  fill: none;
+  stroke: rgba(5, 5, 8, 0.78);
+  stroke-width: 6.25;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.event-route--trade {
+  stroke-dasharray: 4 8;
+}
+
+.event-marker {
+  position: absolute;
+  z-index: 4;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid color-mix(in srgb, var(--marker-color) 78%, white 22%);
+  border-radius: 50%;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  background: rgba(12, 12, 16, 0.9);
+  color: #fff9ec;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 0.22rem rgba(9, 9, 12, 0.65),
+    0 0 1rem color-mix(in srgb, var(--marker-color) 50%, transparent);
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.event-marker.has-image {
+  width: 2.85rem;
+  height: 2.85rem;
+  border-width: 2px;
+  background: #111116;
+}
+
+.event-marker--city {
+  --marker-color: var(--atlas-gold);
+}
+
+.event-marker--party {
+  --marker-color: var(--atlas-blue);
+}
+
+.event-marker--army {
+  --marker-color: var(--atlas-red);
+}
+
+.event-marker--threat {
+  --marker-color: var(--atlas-violet);
+}
+
+.event-marker--place {
+  --marker-color: #c7c1b6;
+}
+
+.event-marker:hover,
+.event-marker:focus-visible,
+.event-marker.is-selected {
+  z-index: 8;
+  outline: none;
+  transform: translate(-50%, -50%) scale(1.18);
+  border-color: white;
+  box-shadow:
+    0 0 0 0.25rem rgba(9, 9, 12, 0.76),
+    0 0 1.35rem var(--marker-color);
+}
+
+.event-marker-core {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  place-items: center;
+  color: var(--marker-color);
+  font-family: var(--headerFont);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.event-marker-core img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 50%;
+  clip-path: circle(50% at 50% 50%);
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.92) contrast(1.04) brightness(0.9);
+}
+
+.event-marker-pulse {
+  position: absolute;
+  inset: -0.32rem;
+  border: 1px solid var(--marker-color);
+  border-radius: 50%;
+  opacity: 0;
+  animation: atlas-marker-pulse 2.6s ease-out infinite;
+}
+
+.event-marker-tooltip {
+  position: absolute;
+  z-index: 10;
+  box-sizing: border-box;
+  bottom: calc(100% + 0.8rem);
+  left: 50%;
+  display: block;
+  visibility: hidden;
+  width: min(17rem, 44vw);
+  border: 1px solid rgba(216, 170, 82, 0.52);
+  border-radius: 0.35rem;
+  padding: 0.7rem 0.78rem;
+  transform: translate(-50%, 0.35rem);
+  background: rgba(14, 14, 18, 0.97);
+  color: #d8d0c4;
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.5);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease,
+    visibility 140ms ease;
+}
+
+.event-marker.is-right-edge .event-marker-tooltip {
+  right: -0.5rem;
+  left: auto;
+  transform: translate(0, 0.35rem);
+}
+
+.event-marker.is-left-edge .event-marker-tooltip {
+  left: -0.5rem;
+  transform: translate(0, 0.35rem);
+}
+
+.event-marker.is-top-edge .event-marker-tooltip {
+  top: calc(100% + 0.8rem);
+  bottom: auto;
+  transform: translate(-50%, -0.35rem);
+}
+
+.event-marker.is-top-edge.is-right-edge .event-marker-tooltip,
+.event-marker.is-top-edge.is-left-edge .event-marker-tooltip {
+  transform: translate(0, -0.35rem);
+}
+
+.event-marker:hover .event-marker-tooltip,
+.event-marker:focus-visible .event-marker-tooltip {
+  visibility: visible;
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+.event-marker.is-right-edge:hover .event-marker-tooltip,
+.event-marker.is-right-edge:focus-visible .event-marker-tooltip,
+.event-marker.is-left-edge:hover .event-marker-tooltip,
+.event-marker.is-left-edge:focus-visible .event-marker-tooltip {
+  transform: translate(0, 0);
+}
+
+.event-marker-tooltip small,
+.event-marker-tooltip strong,
+.event-marker-tooltip span {
+  display: block;
+}
+
+.event-marker-tooltip small {
+  color: var(--marker-color);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.event-marker-tooltip strong {
+  margin: 0.2rem 0 0.35rem;
+  color: #fff8e9;
+  font-family: var(--headerFont);
+  font-size: 0.84rem;
+}
+
+.event-marker-tooltip span {
+  color: #bbb4a8;
+  font-family: var(--bodyFont);
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.event-atlas-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.1rem;
+  padding: 0.65rem 0.15rem 0;
+  color: #aaa398;
+  font-size: 0.68rem;
+}
+
+.event-atlas-legend span::before {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.38rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  vertical-align: -0.04rem;
+  content: "";
+}
+
+.event-atlas-legend .legend-city::before {
+  color: var(--atlas-gold);
+}
+
+.event-atlas-legend .legend-party::before {
+  color: var(--atlas-blue);
+}
+
+.event-atlas-legend .legend-army::before {
+  color: var(--atlas-red);
+}
+
+.event-atlas-legend .legend-threat::before {
+  color: var(--atlas-violet);
+}
+
+.event-atlas-legend .legend-route::before {
+  width: 1.1rem;
+  height: 0;
+  border: 0;
+  border-top: 1px dashed var(--atlas-gold-bright);
+  border-radius: 0;
+}
+
+.event-atlas-detail {
+  min-height: 24rem;
+  border: 1px solid #34313a;
+  border-radius: 0.45rem;
+  padding: 1.15rem;
+  background:
+    linear-gradient(155deg, rgba(216, 170, 82, 0.11), transparent 35%), var(--atlas-panel);
+  box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.28);
+}
+
+.event-atlas-detail h3 {
+  margin: 0.4rem 0 0.75rem;
+  color: #fff7e7;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.event-atlas-detail > p {
+  margin: 0;
+  color: #bbb4a8;
+  font-size: 0.83rem;
+  line-height: 1.62;
+}
+
+.event-detail-link {
+  display: inline-block;
+  margin-top: 1rem;
+  border: 1px solid rgba(216, 170, 82, 0.45);
+  padding: 0.35rem 0.6rem !important;
+  background: rgba(216, 170, 82, 0.12) !important;
+  color: var(--atlas-gold-bright) !important;
+  font-size: 0.78rem;
+}
+
+.event-detail-link[hidden] {
+  display: none;
+}
+
+.event-detail-hint {
+  margin-top: 1.25rem;
+  border-top: 1px solid #34313a;
+  padding-top: 0.85rem;
+}
+
+.event-detail-hint span {
+  display: block;
+  color: #d3aa5e;
+  font-family: var(--codeFont);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.event-detail-hint p {
+  margin: 0.18rem 0 0.65rem;
+  color: #858078;
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+body[data-slug="История/Карта-событий"] .center > hr {
+  display: none;
+}
+
+// The atlas is a full-width interactive view rather than a regular article.
+// Removing the sticky sidebars on this one route keeps them from covering the map.
+body[data-slug="История/Карта-событий"] .page > #quartz-body {
+  box-sizing: border-box;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "grid-center"
+    "grid-footer";
+  width: min(100%, 80rem);
+  margin-inline: auto;
+}
+
+body[data-slug="История/Карта-событий"] #quartz-body > .sidebar {
+  display: none !important;
+}
+
+body[data-slug="История/Карта-событий"] .center > article,
+body[data-slug="История/Карта-событий"] .center > .page-header {
+  width: min(100%, 52rem);
+  margin-inline: auto;
+}
+
+@keyframes atlas-route-flow {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+
+@keyframes atlas-marker-pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.78);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(1.55);
+  }
+}
+
+@media all and (max-width: 1100px) {
+  .event-atlas {
+    width: min(72rem, calc(100vw - 2rem));
+  }
+
+  .event-atlas-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .event-atlas-detail {
+    min-height: 0;
+  }
+
+  .event-detail-hint {
+    display: none;
+  }
+}
+
+@media all and (max-width: 800px) {
+  .event-atlas {
+    width: 100%;
+    margin: 0.5rem 0 3rem;
+    padding: 0.7rem;
+    transform: none;
+  }
+
+  .event-atlas-header {
+    display: block;
+  }
+
+  .event-atlas-date {
+    margin-top: 0.85rem;
+    border-top: 1px solid rgba(216, 170, 82, 0.3);
+    border-left: 0;
+    padding-top: 0.65rem;
+    padding-left: 0;
+    text-align: left;
+  }
+
+  .event-atlas-timeline {
+    grid-template-columns: repeat(6, 9rem);
+  }
+
+  .event-atlas-map {
+    min-width: 42rem;
+  }
+
+  .event-atlas-map-shell {
+    overflow-x: auto;
+    padding-bottom: 0.35rem;
+  }
+
+  .event-marker-tooltip {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-route,
+  .event-marker-pulse {
+    animation: none;
+  }
+}

@@ -25,6 +25,7 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import AsmodeusRitual from "./AsmodeusRitual"
 import EntityCard from "./EntityCard"
+import EventMap from "./EventMap"
 
 export {
   ArticleTitle,
@@ -54,4 +55,5 @@ export {
   ConditionalRender,
   AsmodeusRitual,
   EntityCard,
+  EventMap,
 }
